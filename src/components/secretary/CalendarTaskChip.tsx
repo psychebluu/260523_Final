@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Check, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { resolveTagColor } from "@/lib/secretary/tagColors";
 import { useTagColor } from "@/lib/secretary/taskStore";
 import type { Task } from "@/lib/secretary/types";
 

@@ -10,19 +10,17 @@ type JarvisTypingTextProps = {
   onComplete?: () => void;
 };
 
-export function JarvisTypingText({
+function JarvisTypingTextInner({
   text,
-  speed = 28,
+  speed,
   className,
   onComplete,
-}: JarvisTypingTextProps) {
+}: Required<Pick<JarvisTypingTextProps, "text" | "speed">> &
+  Pick<JarvisTypingTextProps, "className" | "onComplete">) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    setDisplayed("");
-    setDone(false);
-
     let index = 0;
     const timer = window.setInterval(() => {
       index += 1;
@@ -43,5 +41,22 @@ export function JarvisTypingText({
       {displayed}
       {!done && <span className="jarvis-cursor ml-0.5 text-primary">▍</span>}
     </span>
+  );
+}
+
+export function JarvisTypingText({
+  text,
+  speed = 28,
+  className,
+  onComplete,
+}: JarvisTypingTextProps) {
+  return (
+    <JarvisTypingTextInner
+      key={text}
+      text={text}
+      speed={speed}
+      className={className}
+      onComplete={onComplete}
+    />
   );
 }
